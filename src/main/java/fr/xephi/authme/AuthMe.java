@@ -5,6 +5,7 @@ import ch.jalu.injector.InjectorBuilder;
 import com.alessiodp.libby.BukkitLibraryManager;
 import com.github.Anon8281.universalScheduler.UniversalScheduler;
 import com.github.Anon8281.universalScheduler.scheduling.schedulers.TaskScheduler;
+import com.github.retrooper.packetevents.PacketEvents;
 import fr.xephi.authme.api.v3.AuthMeApi;
 import fr.xephi.authme.command.CommandHandler;
 import fr.xephi.authme.command.TabCompleteHandler;
@@ -28,6 +29,7 @@ import fr.xephi.authme.listener.PlayerListener19Spigot;
 import fr.xephi.authme.listener.PlayerListenerHigherThan18;
 import fr.xephi.authme.listener.PurgeListener;
 import fr.xephi.authme.listener.ServerListener;
+import fr.xephi.authme.listener.protocollib.I18NGetLocalePacketEventsAdapter;
 import fr.xephi.authme.mail.EmailService;
 import fr.xephi.authme.output.ConsoleLoggerFactory;
 import fr.xephi.authme.security.crypts.Sha256;
@@ -46,6 +48,7 @@ import fr.xephi.authme.task.CleanupTask;
 import fr.xephi.authme.task.Updater;
 import fr.xephi.authme.task.purge.PurgeService;
 import fr.xephi.authme.util.ExceptionUtils;
+import io.github.retrooper.packetevents.factory.spigot.SpigotPacketEventsBuilder;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -88,6 +91,7 @@ public class AuthMe extends JavaPlugin {
     private Injector injector;
     private BackupService backupService;
     public static ConsoleLogger logger;
+    private static boolean packetEventsEnabled;
 
     /**
      * Constructor.
@@ -143,6 +147,15 @@ public class AuthMe extends JavaPlugin {
      * The library manager
      */
     public static BukkitLibraryManager libraryManager;
+
+    @Override
+    public void onLoad() {
+        if (getServer().getPluginManager().getPlugin("packetevents") != null) {
+            PacketEvents.setAPI(SpigotPacketEventsBuilder.build(this));
+            PacketEvents.getAPI().getSettings().kickOnPacketException(true).reEncodeByDefault(false).checkForUpdates(false);
+            PacketEvents.getAPI().load();
+        }
+    }
 
     /**
      * Method called when the server enables the plugin.
@@ -286,6 +299,8 @@ public class AuthMe extends JavaPlugin {
         // Start Email recall task if needed
         OnStartupTasks onStartupTasks = injector.newInstance(OnStartupTasks.class);
         onStartupTasks.scheduleRecallEmailTask();
+        PacketEvents.getAPI().getEventManager().registerListener(new I18NGetLocalePacketEventsAdapter());
+        PacketEvents.getAPI().init();
     }
 
     /**
@@ -407,6 +422,7 @@ public class AuthMe extends JavaPlugin {
         Consumer<String> infoLogMethod = logger == null ? getLogger()::info : logger::info;
         infoLogMethod.accept("AuthMe " + this.getDescription().getVersion() + " is unloaded successfully!");
         ConsoleLogger.closeFileWriter();
+        PacketEvents.getAPI().terminate();
     }
 
     private void checkForUpdates() {

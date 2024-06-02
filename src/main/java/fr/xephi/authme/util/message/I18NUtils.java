@@ -2,7 +2,6 @@ package fr.xephi.authme.util.message;
 
 import fr.xephi.authme.settings.Settings;
 import fr.xephi.authme.settings.properties.PluginSettings;
-import fr.xephi.authme.util.Utils;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
@@ -43,18 +42,16 @@ public class I18NUtils {
      * @param player The player
      */
     public static String getLocale(Player player) {
-        if (Utils.majorVersion > 15) {
-            return player.getLocale().toLowerCase();
-        } else {
-            long startTime = System.currentTimeMillis();
-            for (;;) {
-                if (PLAYER_LOCALE.containsKey(player.getUniqueId())) {
-                    return PLAYER_LOCALE.get(player.getUniqueId());
-                }
+        long startTime = System.currentTimeMillis();
+        for (;;) {
+            if (PLAYER_LOCALE.containsKey(player.getUniqueId())) {
+                System.out.println(PLAYER_LOCALE.get(player.getUniqueId()) + ", time: " + (System.currentTimeMillis() - startTime) + "ms");
+                return PLAYER_LOCALE.get(player.getUniqueId());
+            }
 
-                if (System.currentTimeMillis() - startTime  > 500) {
-                    return null;
-                }
+            if (System.currentTimeMillis() - startTime > 500) {
+                System.out.println("reach timeout!");
+                return null;
             }
         }
     }

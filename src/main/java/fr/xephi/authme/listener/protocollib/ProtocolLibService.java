@@ -62,8 +62,8 @@ public class ProtocolLibService implements SettingsDependent {
                 logger.warning("WARNING! The denyTabComplete feature requires ProtocolLib! Disabling it...");
             }
 
-            if (i18nMessagesSending) {
-                logger.warning("WARNING! The i18n Messages feature requires ProtocolLib on lower version (< 1.15.2)! Disabling it...");
+            if (!plugin.getServer().getPluginManager().isPluginEnabled("packetevents") && i18nMessagesSending) {
+                logger.warning("WARNING! The i18n Messages feature requires ProtocolLib or PacketEvents! Disabling it...");
             }
 
             this.isEnabled = false;
@@ -142,7 +142,7 @@ public class ProtocolLibService implements SettingsDependent {
 
         this.protectInvBeforeLogin = settings.getProperty(RestrictionSettings.PROTECT_INVENTORY_BEFORE_LOGIN);
         this.denyTabCompleteBeforeLogin = settings.getProperty(RestrictionSettings.DENY_TABCOMPLETE_BEFORE_LOGIN);
-        this.i18nMessagesSending = settings.getProperty(PluginSettings.I18N_MESSAGES) && Utils.majorVersion <= 15;
+        this.i18nMessagesSending = settings.getProperty(PluginSettings.I18N_MESSAGES);
 
         //it was true and will be deactivated now, so we need to restore the inventory for every player
         if (oldProtectInventory && !protectInvBeforeLogin && inventoryPacketAdapter != null) {

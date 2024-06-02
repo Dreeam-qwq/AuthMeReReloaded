@@ -19,8 +19,8 @@ class I18NGetLocalePacketAdapter extends PacketAdapter {
     @Override
     public void onPacketReceiving(PacketEvent event) {
         if (event.getPacketType() == PacketType.Play.Client.SETTINGS) {
-            String locale = event.getPacket().getStrings().read(0).toLowerCase();
             UUID uuid = event.getPlayer().getUniqueId();
+            String locale = event.getPacket().getStrings().read(0).toLowerCase();
 
             I18NUtils.addLocale(uuid, locale);
         }

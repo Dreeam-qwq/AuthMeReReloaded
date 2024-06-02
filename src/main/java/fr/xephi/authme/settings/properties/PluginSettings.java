@@ -27,6 +27,13 @@ public final class PluginSettings implements SettingsHolder {
     public static final Property<Boolean> I18N_MESSAGES =
         newProperty("3rdPartyFeature.features.i18nMessages.enabled", false);
 
+    @Comment({
+        "The timeout to get locale by listening packet, unit: millisecond",
+        "Don't set value bigger than 2000, it will lag the main thread"
+    })
+    public static final Property<Integer> I18N_MESSAGES_GET_LOACLE_TIMEOUT =
+        newProperty("3rdPartyFeature.features.i18nMessages.get-locale-timeout", 500);
+
     @Comment({"Redirect locale code to certain AuthMe language code as you want",
         "Minecraft locale list: https://minecraft.wiki/w/Language",
         "AuthMe language code: https://github.com/HaHaWTH/AuthMeReReloaded/blob/master/docs/translations.md",
