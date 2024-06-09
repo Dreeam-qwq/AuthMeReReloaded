@@ -45,17 +45,15 @@ public class I18NUtils {
         long startTime = System.currentTimeMillis();
         for (;;) {
             if (PLAYER_LOCALE.containsKey(player.getUniqueId())) {
-                System.out.println(PLAYER_LOCALE.get(player.getUniqueId()) + ", time: " + (System.currentTimeMillis() - startTime) + "ms");
+                System.out.println(PLAYER_LOCALE.get(player.getUniqueId()) + ", time: " + (System.currentTimeMillis() - startTime) + "ms"); // For debug usage
                 return PLAYER_LOCALE.get(player.getUniqueId());
             }
 
             if (System.currentTimeMillis() - startTime > 1500) {
-                System.out.println("reach timeout!");
+                System.out.println("reach timeout!"); // For debug usage
                 return null;
             }
         }
-
-        return null;
     }
 
     public static void addLocale(UUID uuid, String locale) {
