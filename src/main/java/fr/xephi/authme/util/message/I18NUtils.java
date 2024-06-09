@@ -49,11 +49,13 @@ public class I18NUtils {
                 return PLAYER_LOCALE.get(player.getUniqueId());
             }
 
-            if (System.currentTimeMillis() - startTime > 500) {
+            if (System.currentTimeMillis() - startTime > 1500) {
                 System.out.println("reach timeout!");
                 return null;
             }
         }
+
+        return null;
     }
 
     public static void addLocale(UUID uuid, String locale) {
@@ -62,6 +64,10 @@ public class I18NUtils {
         }
 
         PLAYER_LOCALE.put(uuid, locale);
+    }
+
+    public static void removeLocale(UUID uuid) {
+        PLAYER_LOCALE.remove(uuid);
     }
 
     /**
