@@ -6,7 +6,7 @@
 
     <groupId>fr.xephi</groupId>
     <artifactId>authme</artifactId>
-    <version>5.6.0-FORK</version>
+    <version>5.6.1-FORK</version>
 
     <name>AuthMeReReloaded</name>
     <description>Fork of the first authentication plugin for the Bukkit API!</description>
@@ -703,7 +703,7 @@
         </dependency>
 
         <!-- MaxMind GEO IP with our modifications to use GSON in replacement of the big Jackson dependency -->
-        <!-- GSON is already included and therefore it reduces the file size in comparison to the original version -->
+        <!-- GSON is already included, and therefore it reduces the file size in comparison to the original version -->
         <dependency>
             <groupId>com.maxmind.db</groupId>
             <artifactId>maxmind-db-gson</artifactId>
