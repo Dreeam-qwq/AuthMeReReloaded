@@ -111,7 +111,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.7.0</version>
+                    <version>3.8.0</version>
                     <configuration>
                         <failOnError>false</failOnError>
                         <failOnWarnings>false</failOnWarnings>
@@ -627,6 +627,12 @@
             <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
         </repository>
 
+        <!-- Placeholder API Repo -->
+        <repository>
+            <id>placeholderapi-repo</id>
+            <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
+        </repository>
+
         <!-- Multiverse Repo -->
         <repository>
             <id>onarandombox-repo-releases</id>
@@ -907,7 +913,7 @@
         <dependency>
             <groupId>net.kyori</groupId>
             <artifactId>adventure-platform-bukkit</artifactId>
-            <version>4.3.2</version>
+            <version>4.3.3</version>
         </dependency>
         <dependency>
             <groupId>net.kyori</groupId>
@@ -1050,6 +1056,14 @@
             </exclusions>
         </dependency>
 
+        <!-- Placeholder API -->
+        <dependency>
+            <groupId>me.clip</groupId>
+            <artifactId>placeholderapi</artifactId>
+            <version>2.11.6</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- EssentialsX plugin -->
         <dependency>
             <groupId>net.essentialsx</groupId>
@@ -1140,7 +1154,7 @@
         <dependency>
             <groupId>org.checkerframework</groupId>
             <artifactId>checker-qual</artifactId>
-            <version>3.45.0</version>
+            <version>3.46.0</version>
             <scope>test</scope>
         </dependency>
 
@@ -1156,7 +1170,7 @@
         <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
-            <version>3.46.0.0</version>
+            <version>3.46.0.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
