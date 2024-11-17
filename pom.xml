@@ -67,7 +67,7 @@
         <maven.minimumVersion>3.6.3</maven.minimumVersion>
 
         <!-- Dependencies versions -->
-        <spigot.version>1.20.6-R0.1-SNAPSHOT</spigot.version>
+        <spigot.version>1.21.1-R0.1-SNAPSHOT</spigot.version>
 
         <!-- Versioning properties -->
         <project.outputName>AuthMe</project.outputName>
@@ -513,7 +513,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>3.12.1</version>
+                <version>3.21.0</version>
             </plugin>
             <!-- Publish coveralls test coverage reports, not included in the build cycle by default -->
             <plugin>
@@ -1170,7 +1170,7 @@
         <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
-            <version>3.46.1.2</version>
+            <version>3.47.0.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
